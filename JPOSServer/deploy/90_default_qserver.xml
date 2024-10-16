@@ -1,0 +1,9 @@
+<qserver name="xml-server" logger="Q2">
+    <attr name="port" type="java.lang.Integer">7000</attr>
+    <channel name="xml.channel"
+             class="org.jpos.iso.channel.ASCIIChannel"
+             packager="org.jpos.iso.packager.ISO93APackager"
+    />
+    <request-listener class="com.pkteq.JPOSServer.task.DefaultRequestListener" logger="Q2">
+    </request-listener>
+</qserver>

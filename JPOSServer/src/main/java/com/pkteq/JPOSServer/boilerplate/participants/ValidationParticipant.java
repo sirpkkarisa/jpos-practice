@@ -1,4 +1,4 @@
-package com.pkteq.JPOSServer.participants;
+package com.pkteq.JPOSServer.boilerplate.participants;
 
 import org.jpos.iso.ISOMsg;
 import org.jpos.transaction.Context;
@@ -12,7 +12,7 @@ public class ValidationParticipant implements TransactionParticipant {
     @Override
     public int prepare(long l, Serializable serializable) {
         Context context = (Context)serializable;
-        ISOMsg resIsoMsg = (ISOMsg)context.get("REQUEST_KEY");
+        ISOMsg resIsoMsg = context.get("REQUEST_KEY");
         Log.getLog("Q2","participant").info("ValidationParticipant: starting preparation");
         System.out.println(resIsoMsg+" MESSAGE");
 

@@ -1,4 +1,4 @@
-package com.pkteq.JPOSServer.participants;
+package com.pkteq.JPOSServer.boilerplate.participants;
 
 import org.jpos.iso.ISOException;
 import org.jpos.iso.ISOMsg;

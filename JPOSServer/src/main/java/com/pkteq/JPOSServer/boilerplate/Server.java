@@ -1,4 +1,4 @@
-package com.pkteq.JPOSServer;
+package com.pkteq.JPOSServer.boilerplate;
 
 import org.jpos.core.Configurable;
 import org.jpos.core.Configuration;
@@ -23,7 +23,7 @@ public class Server implements ISORequestListener, Configurable {
         long timeout = configuration.getLong("spaceTimeout");
         String queueN = configuration.get("queue");
         Context context = new Context();
-        Space space = SpaceFactory.getSpace(spaceN);
+        Space<String,Context> space = SpaceFactory.getSpace(spaceN);
 
         try {
             ISOMsg respMsg = (ISOMsg)m.clone();

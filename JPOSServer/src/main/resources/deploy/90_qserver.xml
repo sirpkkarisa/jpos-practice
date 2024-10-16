@@ -4,7 +4,7 @@
              class="org.jpos.iso.channel.ASCIIChannel"
              packager="org.jpos.iso.packager.ISO87BPackager"
     />
-    <request-listener class="com.pkteq.JPOSServer.Server" logger="Q2">
+    <request-listener class="com.pkteq.JPOSServer.boilerplate.Server" logger="Q2">
         <property name="space" value="transient:default"/>
         <property name="queue" value="TXNMGR"/>
         <property name="timeout" value="12000"/>
