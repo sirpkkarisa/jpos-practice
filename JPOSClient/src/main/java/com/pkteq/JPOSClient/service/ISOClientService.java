@@ -14,14 +14,14 @@ public class ISOClientService {
     public void sendISOMessage() {
         try {
             // Initialize channel with the same packager as the server
-            ASCIIChannel channel = new ASCIIChannel("localhost", 5000, new ISO93APackager());
+            ASCIIChannel channel = new ASCIIChannel("localhost", 7000, new ISO93APackager());
             channel.setTimeout(30000); // 30-second timeout
             channel.connect();
 
             // Create ISO message
             ISOMsg isoMsg = new ISOMsg();
             isoMsg.setMTI("1200");
-            isoMsg.set(3, "000000"); // Processing code
+            isoMsg.set(3, "200000"); // Processing code
             isoMsg.set(4, "1000");   // Transaction amount
             isoMsg.set(7, "0918093031"); // Date & Time
             isoMsg.set(11, "123456"); // STAN
