@@ -10,6 +10,8 @@ import org.jpos.iso.ISOSource;
 import org.jpos.space.Space;
 import org.jpos.space.SpaceFactory;
 import org.jpos.transaction.Context;
+import org.jpos.transaction.TransactionManager;
+import org.jpos.util.NameRegistrar;
 
 import java.io.IOException;
 
@@ -26,7 +28,7 @@ public class DefaultRequestListener implements ISORequestListener, Configurable 
         long timeout = cfg.getLong("spaceTimeout");
         String queueN = cfg.get("queue");
         Context context = new Context();
-        spaceName = "balance_enquiry_queue";
+//        spaceName = "balance_enquiry_queue";
         Space space = SpaceFactory.getSpace(spaceName);
         System.out.println(spaceName+" QUEUE: "+queueN);
 
@@ -39,13 +41,37 @@ public class DefaultRequestListener implements ISORequestListener, Configurable 
                 switch (fld3) {
                     case "310000" -> {
                         // Handle Balance Enquiry
+                        TransactionManager tm = NameRegistrar.get("balance_enquiry_txnmgr");
+//                        tm.run();
+//                        space = tm.getSpace();
+//                        queueN = tm.getQueueName();
+//                        space.out(queueN,);
                         isoMsg.set(39, "000");
-                        source.send(isoMsg);
+                        context.put("REQUEST_KEY",isoMsg);
+                        ISOMsg resp = (ISOMsg)isoMsg.clone();
+                        context.put("RESPONSE_KE",resp);
+                        context.put("RESOURCE_KEY",source);
+                        tm.push(context);
+
+
+//                        source.send(isoMsg);
                         System.out.println("BAL Enquiry Routing");
                     }
-                    case "200000" ->
-                        // Handle Payment Logic
-                            System.out.println("Payment Logic");
+                    case "200000" -> {
+                        TransactionManager tm = NameRegistrar.get("deposit_txnmgr");
+//                        tm.run();
+//                        space = tm.getSpace();
+//                        queueN = tm.getQueueName();
+//                        space.out(queueN,);
+                        isoMsg.set(39, "000");
+                        context.put("REQUEST_KEY", isoMsg);
+                        ISOMsg resp = (ISOMsg) isoMsg.clone();
+                        context.put("RESPONSE_KE", resp);
+                        context.put("RESOURCE_KEY", source);
+                        tm.push(context);
+
+                    }
+//                        source.send(isoMsg);
                     case "010000" -> System.out.println("withdrawal");
                     default -> {
                         isoMsg.set(39, "908"); //Transaction destination cannot be found for routing

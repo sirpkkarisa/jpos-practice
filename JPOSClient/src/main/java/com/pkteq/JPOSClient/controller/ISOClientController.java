@@ -3,6 +3,7 @@ package com.pkteq.JPOSClient.controller;
 import com.pkteq.JPOSClient.service.ISOClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class ISOClientController {
     @Autowired
     ISOClientService isoClientService;
-    @GetMapping("send")
-    public String handleSend() {
+    @GetMapping("send/{option}")
+    public String handleSend(@PathVariable Integer option ) {
         try {
-            isoClientService.sendISOMessage();
+            isoClientService.sendISOMessage(option);
             return "Message sent";
         } catch (Exception e) {
             System.out.println(e.getMessage());

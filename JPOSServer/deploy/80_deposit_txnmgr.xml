@@ -4,7 +4,5 @@
     <property name="max-sessions" value="100"/>
     <property name="debug" value="true"/>
 
-    <participant class="com.pkteq.JPOSServer.boilerplate.participants.ValidationParticipant" realm="validation-processor" logger="Q2"/>
-    <participant class="com.pkteq.JPOSServer.boilerplate.participants.AuthorizationParticipant" realm="authorization-processor" logger="Q2"/>
-    <participant class="com.pkteq.JPOSServer.boilerplate.participants.LoggingParticipant" realm="logging-processor" logger="Q2"/>
+    <participant class="com.pkteq.JPOSServer.task.participants.DepositRequestParticipant" realm="deposit-request-processor" logger="Q2"/>
 </txnmgr>
