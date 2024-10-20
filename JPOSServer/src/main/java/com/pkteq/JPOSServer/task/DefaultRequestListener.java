@@ -42,27 +42,15 @@ public class DefaultRequestListener implements ISORequestListener, Configurable 
                     case "310000" -> {
                         // Handle Balance Enquiry
                         TransactionManager tm = NameRegistrar.get("balance_enquiry_txnmgr");
-//                        tm.run();
-//                        space = tm.getSpace();
-//                        queueN = tm.getQueueName();
-//                        space.out(queueN,);
                         isoMsg.set(39, "000");
                         context.put("REQUEST_KEY",isoMsg);
                         ISOMsg resp = (ISOMsg)isoMsg.clone();
                         context.put("RESPONSE_KE",resp);
                         context.put("RESOURCE_KEY",source);
                         tm.push(context);
-
-
-//                        source.send(isoMsg);
-                        System.out.println("BAL Enquiry Routing");
                     }
                     case "200000" -> {
                         TransactionManager tm = NameRegistrar.get("deposit_txnmgr");
-//                        tm.run();
-//                        space = tm.getSpace();
-//                        queueN = tm.getQueueName();
-//                        space.out(queueN,);
                         isoMsg.set(39, "000");
                         context.put("REQUEST_KEY", isoMsg);
                         ISOMsg resp = (ISOMsg) isoMsg.clone();

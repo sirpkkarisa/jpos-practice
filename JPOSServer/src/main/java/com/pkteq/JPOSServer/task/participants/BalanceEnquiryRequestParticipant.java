@@ -19,13 +19,13 @@ public class BalanceEnquiryRequestParticipant implements TransactionParticipant 
 
     @Override
     public void commit(long id, Serializable serializable) {
-        Log.getLog("Q2","participant").info("BalanceEnquiryRequestParticipant: commit preparation");
+        Log.getLog("Q2","participant").info("BalanceEnquiryRequestParticipant: commit");
         sendMessage((Context) serializable);
     }
 
     @Override
     public void abort(long id, Serializable serializable) {
-        Log.getLog("Q2","participant").info("BalanceEnquiryRequestParticipant: abort preparation");
+        Log.getLog("Q2","participant").info("BalanceEnquiryRequestParticipant: abort");
         sendMessage((Context) serializable);
     }
 
