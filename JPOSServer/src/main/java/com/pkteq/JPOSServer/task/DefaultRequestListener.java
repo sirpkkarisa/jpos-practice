@@ -28,48 +28,17 @@ public class DefaultRequestListener implements ISORequestListener, Configurable 
         long timeout = cfg.getLong("spaceTimeout");
         String queueN = cfg.get("queue");
         Context context = new Context();
-//        spaceName = "balance_enquiry_queue";
         Space space = SpaceFactory.getSpace(spaceName);
-        System.out.println(spaceName+" QUEUE: "+queueN);
 
         try {
-            if (!isoMsg.hasField(3)) {
-                isoMsg.set(39, "922"); //Message number out of sequence
-                context.put("ERROR_MESSAGE","Message number out of sequence");
-            } else {
-                String fld3 = isoMsg.getString(3);
-                switch (fld3) {
-                    case "310000" -> {
-                        // Handle Balance Enquiry
-                        TransactionManager tm = NameRegistrar.get("balance_enquiry_txnmgr");
-                        isoMsg.set(39, "000");
-                        context.put("REQUEST_KEY",isoMsg);
-                        ISOMsg resp = (ISOMsg)isoMsg.clone();
-                        context.put("RESPONSE_KE",resp);
-                        context.put("RESOURCE_KEY",source);
-                        tm.push(context);
-                    }
-                    case "200000" -> {
-                        TransactionManager tm = NameRegistrar.get("deposit_txnmgr");
-                        isoMsg.set(39, "000");
-                        context.put("REQUEST_KEY", isoMsg);
-                        ISOMsg resp = (ISOMsg) isoMsg.clone();
-                        context.put("RESPONSE_KE", resp);
-                        context.put("RESOURCE_KEY", source);
-                        tm.push(context);
+            ISOMsg respMsg = (ISOMsg) isoMsg.clone();
+            context.put("REQUEST_KEY",isoMsg);
+            context.put("RESPONSE_KEY",respMsg);
+            context.put("RESOURCE_KEY",source);
 
-                    }
-//                        source.send(isoMsg);
-                    case "010000" -> System.out.println("withdrawal");
-                    default -> {
-                        isoMsg.set(39, "908"); //Transaction destination cannot be found for routing
-                        context.put("ERROR_MESSAGE","Message number out of sequence");
-                    }
-                }
-            }
+            TransactionManager tm = NameRegistrar.get("default_txnmgr");
+            tm.push(context);
 
-            source.send(isoMsg);
-            return true;
         }catch (Exception e) {
             isoMsg.set(39,"907");
             context.put("ERROR_MESSAGE","Message number out of sequence");

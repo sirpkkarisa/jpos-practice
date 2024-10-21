@@ -4,7 +4,6 @@
     <property name="max-sessions" value="100"/>
     <property name="debug" value="true"/>
 
-    <participant class="com.pkteq.JPOSServer.task.participants.BalanceEnquiryRequestParticipant" realm="balance-inquiry-processor" logger="Q2"/>
-<!--    <participant class="com.pkteq.JPOSServer.boilerplate.participants.AuthorizationParticipant" realm="authorization-processor" logger="Q2"/>-->
-<!--    <participant class="com.pkteq.JPOSServer.boilerplate.participants.LoggingParticipant" realm="logging-processor" logger="Q2"/>-->
+    <participant class="com.pkteq.JPOSServer.task.participants.ComputeBalanceParticipant" realm="compute-balance-processor" logger="Q2"/>
+    <participant class="com.pkteq.JPOSServer.task.participants.CheckFieldsForBalanceRequestParticipant" realm="check-fields-processor" logger="Q2"/>
 </txnmgr>

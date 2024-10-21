@@ -1,0 +1,9 @@
+<txnmgr name="default_txnmgr" class="org.jpos.transaction.TransactionManager"  logger="Q2">
+    <property name="space" value="tspace:default"/>
+    <property name="queue" value="default_queue"/>
+    <property name="max-sessions" value="100"/>
+    <property name="debug" value="true"/>
+
+    <participant class="com.pkteq.JPOSServer.task.participants.CheckVersionParticipant" realm="check-version-processor" logger="Q2"/>
+    <participant class="com.pkteq.JPOSServer.task.participants.RoutingRequestsParticipant" realm="routing-requests-processor" logger="Q2"/>
+</txnmgr>

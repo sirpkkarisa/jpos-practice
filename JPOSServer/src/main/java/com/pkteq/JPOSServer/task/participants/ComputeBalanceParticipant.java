@@ -10,7 +10,7 @@ import org.jpos.util.Log;
 import java.io.IOException;
 import java.io.Serializable;
 
-public class BalanceEnquiryRequestParticipant implements TransactionParticipant {
+public class ComputeBalanceParticipant implements TransactionParticipant {
     @Override
     public int prepare(long l, Serializable serializable) {
         System.out.println("BALANCE PARTICIPANT");
@@ -19,13 +19,13 @@ public class BalanceEnquiryRequestParticipant implements TransactionParticipant 
 
     @Override
     public void commit(long id, Serializable serializable) {
-        Log.getLog("Q2","participant").info("BalanceEnquiryRequestParticipant: commit");
+        Log.getLog("Q2","participant").info("ComputeBalanceParticipant: commit");
         sendMessage((Context) serializable);
     }
 
     @Override
     public void abort(long id, Serializable serializable) {
-        Log.getLog("Q2","participant").info("BalanceEnquiryRequestParticipant: abort");
+        Log.getLog("Q2","participant").info("ComputeBalanceParticipant: abort");
         sendMessage((Context) serializable);
     }
 
