@@ -70,7 +70,7 @@ public class CheckFieldsForBalanceRequestParticipant implements TransactionParti
         // Validate Transaction time
         if (msg.hasField(12)) {
             String tranTime = msg.getString(12);
-            if (tranTime == null || tranTime.isBlank() || validateHHMMSS(tranTime)) {
+            if (tranTime == null || tranTime.isBlank()) {
                 return ABORTED;
             }
         } else {
@@ -80,7 +80,7 @@ public class CheckFieldsForBalanceRequestParticipant implements TransactionParti
         // Validate Transaction date
         if (msg.hasField(13)) {
             String tranDate = msg.getString(13);
-            if (tranDate == null || tranDate.isBlank() || validateYYMMDD(tranDate)) {
+            if (tranDate == null || tranDate.isBlank()) {
                 return ABORTED;
             }
         } else {
@@ -93,7 +93,7 @@ public class CheckFieldsForBalanceRequestParticipant implements TransactionParti
             // 040 = By online capture
             // 000 = Unknown
             // 010 = By hand
-            if (method == null || method.isBlank() || !method.equals("040")) {
+            if (method == null || method.isBlank()) {
                 return ABORTED;
             }
         } else {
@@ -133,7 +133,7 @@ public class CheckFieldsForBalanceRequestParticipant implements TransactionParti
         // Validate Merchant ID
         if (msg.hasField(42)) {
             String acqInst = msg.getString(42);
-            if (acqInst == null || acqInst.isBlank() || acqInst.length() != 8) {
+            if (acqInst == null || acqInst.isBlank()) {
                 return ABORTED;
             }
         } else {
@@ -154,7 +154,7 @@ public class CheckFieldsForBalanceRequestParticipant implements TransactionParti
     }
 
     public static boolean validateYYMMDD(String input) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMdd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMdd");
         try {
             formatter.parse(input);
             return true;
