@@ -54,6 +54,9 @@ public class ISOClientService {
                 System.out.println("Response received: " + response);
                 System.out.println("Response MTI: " + response.getMTI());
                 System.out.println("Response Code: " + response.getString(39));
+                if (response.hasField(54)) {
+                    System.out.println("Account Balance: " + response.getString(54));
+                }
             } else {
                 System.out.println("No response received from server.");
             }

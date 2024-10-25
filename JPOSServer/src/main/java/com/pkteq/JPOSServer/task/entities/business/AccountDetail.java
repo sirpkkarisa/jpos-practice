@@ -1,7 +1,9 @@
 package com.pkteq.JPOSServer.task.entities.business;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class AccountDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +31,8 @@ public class AccountDetail {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "balance_id")
     private AccountBalanceDetail accountBalanceDetails;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "accountDetail")
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "accountDetail",fetch = FetchType.EAGER)
     private List<TransactionDetails> transactionDetails = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "customer_id")

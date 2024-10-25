@@ -1,5 +1,7 @@
 package com.pkteq.JPOSServer.task.entities.business;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.pkteq.JPOSServer.task.enums.TransactionStatus;
 import com.pkteq.JPOSServer.task.enums.TransactionType;
 import jakarta.persistence.*;
@@ -16,6 +18,7 @@ public class TransactionDetails {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "account_id")
+    @JsonBackReference
     private AccountDetail accountDetail;
     @Column(nullable = false)
     private TransactionType transactionType;
